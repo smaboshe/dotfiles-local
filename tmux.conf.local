@@ -1,0 +1,6 @@
+# Set the session name in the status area
+set-option -g status-left "#S (#{window_index} windows) "
+
+# Start windows and panes at 0, not 1
+set -g base-index 0
+setw -g pane-base-index 0
