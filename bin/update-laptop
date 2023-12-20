@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+echo "Updating laptop ..."
+cd ~/c/laptop
+git stash -u
+git checkout main
+git pull
+sh mac 2>&1 | tee ~/laptop.log
+echo "... done"
