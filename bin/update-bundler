@@ -11,6 +11,8 @@ fi
 
 BUNDLER_RELEASE="https://github.com/rubygems/rubygems/releases/tag/bundler-v$BUNDLER_VERSION"
 
+docker pull ruby
+
 run_in_container() {
 	container_id=$1
 	shift
@@ -34,6 +36,7 @@ do
 	git pull
 
 	container_id=$(docker run -d -v .:/app ruby sleep infinity)
+
 	echo "Bundling..."
 	run_in_container "$container_id" "bundle install"
 	echo "Installing new version of bundler..."
