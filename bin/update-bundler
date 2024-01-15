@@ -5,13 +5,11 @@ set -e
 BUNDLER_VERSION="$1"
 if [ -z "$BUNDLER_VERSION" ]; then
     echo "Usage: Please provide a Bundler version. For example:"
-    echo "update-bundler 2.4.21"
+    echo "update-bundler 2.5.4"
     exit 1
 fi
 
 BUNDLER_RELEASE="https://github.com/rubygems/rubygems/releases/tag/bundler-v$BUNDLER_VERSION"
-
-docker pull ruby
 
 run_in_container() {
 	container_id=$1
@@ -31,11 +29,15 @@ do
 	echo "BUNDLER_VERSION: $BUNDLER_VERSION"
 	echo "BUNDLER_RELEASE: $BUNDLER_RELEASE"
 
+	ruby_version=$(ruby -e 'puts RUBY_VERSION')
+
+	docker pull ruby:${ruby_version}
+
 	git stash -u
 	git checkout main
 	git pull
 
-	container_id=$(docker run -d -v .:/app ruby sleep infinity)
+	container_id=$(docker run -d -v .:/app ruby:${ruby_version} sleep infinity)
 
 	echo "Bundling..."
 	run_in_container "$container_id" "bundle install"
