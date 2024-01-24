@@ -6,4 +6,8 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/tools/bin:$PATH
 
+# Fix NSCFConstantString initialize error
+# https://www.jdeen.com/blog/fix-ruby-macos-nscfconstantstring-initialize-error
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 export PATH="$HOME/.bin:$PATH"
