@@ -59,7 +59,7 @@ do
 		git checkout -b $branch
 		git commit Gemfile.lock -m "Update Bundler to v$BUNDLER_VERSION" -m "$BUNDLER_RELEASE"
 		git push -u
-		gh pr create --fill --head $branch
+		gh pr create --assignee @me --fill --head $branch
 		git checkout main
 		git branch -d $branch
 	fi
