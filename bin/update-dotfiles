@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+echo "Updating dotfiles ..."
+cd ~/c/dotfiles
+git stash -u
+git checkout main
+git pull
+rcup
+echo "... done"
