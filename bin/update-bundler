@@ -23,6 +23,8 @@ while IFS= read -r folder
 do
 	cd "$(eval echo $folder)"
 
+	asdf install
+
 	echo
 	echo "================================================="
 	echo "Processing: $folder"
